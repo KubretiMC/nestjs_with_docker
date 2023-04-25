@@ -8,6 +8,7 @@ services:
     depends_on:
       - redis
   redis:
-    image: redis:alpine
+    image: redis
+    container_name: client
     ports:
       - '6379:6379'

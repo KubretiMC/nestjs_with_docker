@@ -7,7 +7,7 @@ export class RedisCacheController {
 
   @Post('cache')
   async setCache(@Body('key') key: string, @Body('value') value: string) {
-    console.log('eeee');
+    console.log('3456');
     return this.redisCacheService.set(key, value);
   }
 }

@@ -1,10 +1,15 @@
 import { Module } from '@nestjs/common';
-import { RedisCacheController } from './controllers/redis-cache.controller';
-import { RedisCacheService } from './services/redis-cache.service';
+import { RedisModule } from '@liaoliaots/nestjs-redis';
 
 @Module({
-  imports: [],
-  controllers: [RedisCacheController],
-  providers: [RedisCacheService],
+  imports: [
+    RedisModule.forRoot({
+      config: {
+        host: 'localhost',
+        port: 6379,
+        password: 'authpassword'
+      }
+    })
+  ]
 })
-export class RedisModule {}
+export class AppModule {}
