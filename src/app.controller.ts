@@ -3,7 +3,9 @@ import { RedisService } from 'nestjs-redis';
 
 @Controller()
 export class AppController {
-  constructor(private readonly redisService: RedisService) {}
+  constructor(
+    // private readonly redisService: RedisService
+    ) {}
 
   @Get()
   getHello(): string {

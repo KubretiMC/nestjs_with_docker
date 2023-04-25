@@ -2,27 +2,20 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
-// import { RedisModule } from 'nestjs-redis';
-// import { RedisCacheModule } from './redis/redis.module';
-import { RedisModule } from '@liaoliaots/nestjs-redis';
-
+import { RedisUsersModule } from './redis/redis.module';
+import { BullModule } from '@nestjs/bull';
 @Module({
   imports: [
-    // RedisCacheModule,
-    // RedisModule.register({
-    //   host: 'redis', // the hostname of the Redis container in Docker
-    //   port: 6379, // the Redis port
-    // }),
-
-    RedisModule.forRoot({
-      config: {
-        host: 'localhost',
+    BullModule.forRoot({
+      redis: {
+        host: process.env.REDIS_HOST || 'localhost',
         port: 6379,
-      }
+      },
     }),
-    UsersModule,
+    RedisUsersModule,
+    // UsersModule,
   ],
-  // controllers: [AppController],
-  // providers: [AppService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

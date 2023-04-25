@@ -5,10 +5,10 @@ services:
     build: .
     ports:
       - '3000:3000'
+    environment:
+      - REDIS_HOST=redis
     depends_on:
       - redis
+
   redis:
-    image: redis
-    container_name: client
-    ports:
-      - '6379:6379'
+    image: 'redis:latest'
