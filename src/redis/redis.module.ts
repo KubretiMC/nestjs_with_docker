@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common';
 import { BullModule } from '@nestjs/bull';
 import { RedisUserService } from './services/redis-user.service';
 import { RedisUserController } from './controllers/redis-cache.controller';
-import { RedisUserConsumer } from './consumers/redis-user.consumer';
-import { RedisUserSlowConsumer } from './consumers/redis-user-slow.consumer';
+import { RedisUserConsumer } from './consumers/redis-user-fast/redis-user.consumer';
+import { RedisUserSlowConsumer } from './consumers/redis-user-slow/redis-user-slow.consumer';
 @Module({
   imports: [
     BullModule.registerQueue({
