@@ -9,7 +9,9 @@ import { RedisUserService } from '../../services/redis-user.service';
 
 @Processor('users')
 export class RedisUserConsumer {
-  constructor(private readonly redisUserService: RedisUserService) {}
+  constructor(private readonly redisUserService: RedisUserService) {
+    console.log('asdf');
+  }
   @OnGlobalQueueActive()
   onActive() {
     console.log(`Processing fast job...`);

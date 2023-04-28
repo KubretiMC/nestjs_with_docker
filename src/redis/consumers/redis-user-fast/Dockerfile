@@ -2,11 +2,15 @@ FROM node:14-alpine
 
 WORKDIR /app
 
-COPY package*.json ./
+# Install TypeScript
+RUN npm install -g typescript
 
+COPY package*.json ./
 RUN npm install
 
-COPY src/redis/consumers/redis-user-fast/redis-user.consumer.ts ./
-COPY src/redis/redis.module.ts ./
+COPY tsconfig.json ./
+COPY src/redis/consumers/redis-user-fast/redis-user.consumer.ts ./src/redis/consumers/redis-user-fast/
+
+RUN npm run build
 
 CMD ["npm", "run", "start:redis-user-fast"]

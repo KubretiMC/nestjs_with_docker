@@ -2,11 +2,17 @@ FROM node:14-alpine
 
 WORKDIR /app
 
-COPY package*.json ./
+# Install TypeScript
+RUN npm install -g typescript
 
+COPY package*.json ./
 RUN npm install
 
-COPY src/redis/consumers/redis-user-slow/redis-user-slow.consumer.ts ./
-COPY src/redis/redis.module.ts ./
+COPY tsconfig.json ./
+COPY src/redis/consumers/redis-user-slow/redis-user-slow.consumer.ts ./src/redis/consumers/redis-user-slow/
+
+EXPOSE 3006
+
+RUN npm run build
 
 CMD ["npm", "run", "start:redis-user-slow"]

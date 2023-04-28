@@ -1,10 +1,10 @@
 import { Processor, Process, OnGlobalQueueActive } from '@nestjs/bull';
 import { Job } from 'bull';
-import { RedisUserService } from '../../services/redis-user.service';
-
 @Processor('users-slow')
 export class RedisUserSlowConsumer {
-  constructor(private readonly redisUserService: RedisUserService) {}
+  constructor() {
+    console.log('do something');
+  }
   @OnGlobalQueueActive()
   onActive() {
     console.log(`Processing slow job...`);

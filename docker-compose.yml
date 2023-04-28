@@ -9,27 +9,18 @@ services:
       - REDIS_HOST=redis
     depends_on:
       - redis
-      - redis-user-fast
       - redis-user-slow
 
   redis:
     image: 'redis:latest'
 
-  redis-user-fast:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    depends_on:
-      - redis
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-
   redis-user-slow:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: src/redis/consumers/redis-user-slow/Dockerfile
+    ports:
+      - '3006:3006'
+    environment:
+      - REDIS_HOST=redis
     depends_on:
       - redis
