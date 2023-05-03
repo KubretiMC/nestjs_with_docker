@@ -1,0 +1,9 @@
+# # Dockerfile and docker-compose.yml
+# Dockerfile
+# docker-compose.yml
+
+# # Node.js dependencies
+# node_modules/
+
+# # Source code for RedisUserSlowConsumer
+# src/redis/consumers/redis-user-slow/redis-user-slow.consumer.ts

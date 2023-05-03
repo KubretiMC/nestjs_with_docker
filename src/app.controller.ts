@@ -1,24 +1,20 @@
-import { Controller, Get } from '@nestjs/common';
-import { RedisService } from 'nestjs-redis';
+import { Controller, Get, Logger } from '@nestjs/common';
+import { InjectQueue } from '@nestjs/bull';
+import { Queue } from 'bull';
+import { SlowWorker } from './workers/slow.worker';
 
 @Controller()
 export class AppController {
-  constructor(
-    // private readonly redisService: RedisService
-    ) {}
-
-  @Get()
-  getHello(): string {
-    console.log('2345');
-    // this.appService.set();
-    return 'asdf';
+  constructor(@InjectQueue('slow') private readonly slowQueue: Queue) {
+    console.log('88787878');
   }
-  
-  // @Get()
-  // async getHello(): Promise<string> {
-  //   const client = this.redisService.getClient();
-  //   await client.set('hello', 'world');
-  //   const result = await client.get('hello');
-  //   return `Hello ${result}!`;
-  // }
+  private readonly logger = new Logger(AppController.name);
+
+  @Get('/slow-job')
+  async addSlowJob(): Promise<any> {
+    console.log('888888888888888888');
+    this.logger.log('Hello world!');
+    await this.slowQueue.add(SlowWorker.JOB_NAME, { someData: 'data' });
+    return 'Hello World!';
+  }
 }

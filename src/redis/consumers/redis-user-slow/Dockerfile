@@ -11,7 +11,7 @@ RUN npm install
 COPY tsconfig.json ./
 COPY src/redis/consumers/redis-user-slow/redis-user-slow.consumer.ts ./src/redis/consumers/redis-user-slow/
 
-EXPOSE 3006
+# EXPOSE 6379
 
 RUN npm run build
 

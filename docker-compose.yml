@@ -1,26 +1,25 @@
-version: '3'
+version: '3.8'
 
 services:
-  app:
-    build: .
-    ports:
-      - '3000:3000'
-    environment:
-      - REDIS_HOST=redis
-    depends_on:
-      - redis
-      - redis-user-slow
-
-  redis:
-    image: 'redis:latest'
-
-  redis-user-slow:
+  web:
     build:
       context: .
-      dockerfile: src/redis/consumers/redis-user-slow/Dockerfile
+      dockerfile: Dockerfile
     ports:
-      - '3006:3006'
-    environment:
-      - REDIS_HOST=redis
+      - '3000:3000'
     depends_on:
       - redis
+    environment:
+      - NODE_ENV=production
+
+  slow-worker:
+    build:
+      context: .
+      dockerfile: src/workers/slow.worker.dockerfile
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:alpine
+    ports:
+      - '6379:6379'
