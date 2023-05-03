@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common';
 import { BullModule } from '@nestjs/bull';
 import { SlowController } from './controllers/slow.controller';
-import { SlowWorker } from './workers/slow.worker';
-import { AppService } from 'src/app.service';
 import { SlowService } from './services/slow.service';
 
 @Module({
@@ -27,6 +25,6 @@ import { SlowService } from './services/slow.service';
     // }),
   ],
   controllers: [SlowController],
-  providers: [SlowWorker, AppService, SlowService],
+  providers: [SlowService],
 })
 export class SlowModule {}
