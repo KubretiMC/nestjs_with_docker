@@ -1,16 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { InjectQueue } from '@nestjs/bull';
-import { Queue } from 'bull';
+import { SlowService } from './app.slow.service';
+
 @Injectable()
 export class AppService {
-  constructor(@InjectQueue('slow') private readonly slowQueue: Queue) {}
+  constructor(private readonly slowService: SlowService) {}
 
   async createUser(name: any): Promise<any> {
     console.log('name1234', name);
-    const job = await this.slowQueue.add('slow-job', {
-      someData: 'data',
-    });
+    await this.slowService.addSlowJob({ someData: 'data' });
     console.log('create userService');
-    return job.data.name;
+    return name;
   }
 }

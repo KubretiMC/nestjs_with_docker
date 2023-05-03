@@ -3,6 +3,7 @@ import { BullModule } from '@nestjs/bull';
 import { SlowWorker } from './workers/slow.worker';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { SlowService } from './app.slow.service';
 
 @Module({
   imports: [
@@ -15,17 +16,17 @@ import { AppService } from './app.service';
         },
       }),
     }),
-    BullModule.registerQueueAsync({
-      name: 'fast',
-      useFactory: () => ({
-        redis: {
-          host: 'redis',
-          port: 6379,
-        },
-      }),
-    }),
+    // BullModule.registerQueueAsync({
+    //   name: 'fast',
+    //   useFactory: () => ({
+    //     redis: {
+    //       host: 'redis',
+    //       port: 6379,
+    //     },
+    //   }),
+    // }),
   ],
   controllers: [AppController],
-  providers: [SlowWorker, AppService],
+  providers: [SlowWorker, AppService, SlowService],
 })
 export class AppModule {}

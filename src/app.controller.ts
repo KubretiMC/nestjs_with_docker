@@ -1,16 +1,13 @@
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import { SlowService } from './app.slow.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {
-    console.log('88787878');
-  }
+  constructor(private readonly slowService: SlowService) {}
 
   @Get('/slow-job')
   async addSlowJob(): Promise<any> {
-    console.log('888888888888888888');
-    const result = this.appService.createUser('user5');
+    console.log('11111');
     return result;
   }
 }
