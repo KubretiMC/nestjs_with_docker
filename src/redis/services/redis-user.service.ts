@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectQueue } from '@nestjs/bull';
 import { Queue } from 'bull';
-import { SlowWorker } from 'src/workers/slow.worker';
+import { SlowWorker } from 'src/slow/workers/slow.worker';
 
 @Injectable()
 export class RedisUserService {

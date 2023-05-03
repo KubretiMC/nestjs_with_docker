@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { SlowService } from './app.slow.service';
+import { SlowService } from './slow/services/slow.service';
 
 @Injectable()
 export class AppService {
