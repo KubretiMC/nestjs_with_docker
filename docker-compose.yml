@@ -16,7 +16,7 @@ services:
   slow-worker:
     build:
       context: .
-      dockerfile: src/slow/workers/slow.worker.dockerfile
+      dockerfile: src/slow/workers/slow-worker/slow.worker.dockerfile
     depends_on:
       - redis
 
