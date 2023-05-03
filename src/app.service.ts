@@ -1,13 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRedis, DEFAULT_REDIS_NAMESPACE } from '@liaoliaots/nestjs-redis';
-import Redis from 'ioredis';
-
+import { InjectQueue } from '@nestjs/bull';
+import { Queue } from 'bull';
 @Injectable()
 export class AppService {
-  constructor() {} // @InjectRedis() private readonly redis: Redis // or // @InjectRedis(DEFAULT_REDIS_NAMESPACE) private readonly redis: Redis
+  constructor(@InjectQueue('slow') private readonly slowQueue: Queue) {}
 
-  async set() {
-    console.log('123456');
-    // return await this.redis.set('key', 'value', 'EX', 10);
+  async createUser(name: any): Promise<any> {
+    console.log('name1234', name);
+    const job = await this.slowQueue.add('slow-job', {
+      someData: 'data',
+    });
+    console.log('create userService');
+    return job.data.name;
   }
 }

@@ -16,9 +16,9 @@ async function bootstrap() {
   app.use(bodyParser.json({ limit: '10mb' }));
   app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
   console.log('hi23488888');
-  const userService = app.get(AppController);
+  // const userService = app.get(AppController);
   console.log('eeee');
-  await userService.addSlowJob();
+  // await userService.addSlowJob();
   await app.listen(3000);
 }
 bootstrap();

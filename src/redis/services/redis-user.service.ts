@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectQueue } from '@nestjs/bull';
 import { Queue } from 'bull';
+import { SlowWorker } from 'src/workers/slow.worker';
 
 @Injectable()
 export class RedisUserService {
@@ -31,16 +32,17 @@ export class RedisUserService {
 
   async createUser(name: any): Promise<any> {
     let job;
-    if (name === 'user5') {
-      job = await this.usersQueue.add({
-        name: name,
-      });
-    } else {
-      job = await this.usersSlowQueue.add({
-        name: name,
-      });
-    }
-    console.log('create userService');
+    console.log('555555555555555555555555555555');
+    // if (name === 'user5') {
+    //   job = await this.usersQueue.add(SlowWorker.JOB_NAME, {
+    //     name: name,
+    //   });
+    // } else {
+    //   job = await this.usersSlowQueue.add(SlowWorker.JOB_NAME, {
+    //     name: name,
+    //   });
+    // }
+    // console.log('create userService', job);
     return job.data.name;
   }
 }
