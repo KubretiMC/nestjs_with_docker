@@ -19,6 +19,13 @@ services:
       dockerfile: src/slow/workers/slow-worker/slow.worker.dockerfile
     depends_on:
       - redis
+  
+  fast-worker:
+    build:
+      context: .
+      dockerfile: src/slow/workers/fast-worker/fast.worker.dockerfile
+    depends_on:
+      - redis
 
   redis:
     image: redis:alpine
