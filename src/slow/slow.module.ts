@@ -29,4 +29,4 @@ import { FastWorker } from './workers/fast-worker/fast.worker';
   controllers: [JobController],
   providers: [JobService],
 })
-export class SlowModule {}
+export class WorkersModule {}

@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { SlowModule } from './slow/slow.module';
+import { WorkersModule } from './slow/slow.module';
 
 @Module({
-  imports: [SlowModule],
+  imports: [WorkersModule],
   controllers: [],
   providers: [],
 })
