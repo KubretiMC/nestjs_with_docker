@@ -7,7 +7,6 @@ export class JobController {
 
   @Post('/job')
   async addJob(@Body() data: any): Promise<any> {
-    console.log('11111', data);
     const result = await this.jobService.addJob(data);
     return result;
   }

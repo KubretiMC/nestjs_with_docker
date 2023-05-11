@@ -10,12 +10,9 @@ export class JobService {
   ) {}
 
   async addJob(data: any): Promise<void> {
-    console.log('22222', data);
     if (data.name === 'user5') {
-      console.log('slower');
       await this.slowQueue.add('slow-job', data);
     } else {
-      console.log('faster');
       await this.fastQueue.add('fast-job', data);
     }
   }

@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { BullModule } from '@nestjs/bull';
-import { SlowWorker } from './workers/slow-worker/slow.worker';
+import { FastWorker } from './workers/fast-worker/fast.worker';
 
 @Module({
   imports: [
@@ -11,10 +11,10 @@ import { SlowWorker } from './workers/slow-worker/slow.worker';
       },
     }),
     BullModule.registerQueue({
-      name: 'slow',
+      name: 'fast',
     }),
   ],
   controllers: [],
-  providers: [SlowWorker],
+  providers: [FastWorker],
 })
-export class SlowModule {}
+export class FastModule {}
