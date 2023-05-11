@@ -3,6 +3,9 @@ import { Job } from 'bull';
 
 @Processor('slow')
 export class SlowWorker {
+  constructor() {
+    console.log('23456');
+  }
 
   @Process('slow-job')
   async handleJob(job: Job<unknown>): Promise<void> {

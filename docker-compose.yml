@@ -19,6 +19,10 @@ services:
       dockerfile: src/slow/workers/slow-worker/slow.worker.dockerfile
     depends_on:
       - redis
+    hostname: my-slow-container
+    ports:
+      - "6378:6379"
+
   
   fast-worker:
     build:
@@ -26,8 +30,9 @@ services:
       dockerfile: src/slow/workers/fast-worker/fast.worker.dockerfile
     depends_on:
       - redis
+    hostname: my-fast-container
 
   redis:
     image: redis:alpine
     ports:
-      - '6379:6379'
+      - '6377:6379'

@@ -7,26 +7,28 @@ import { FastWorker } from './workers/fast-worker/fast.worker';
 
 @Module({
   imports: [
-    BullModule.registerQueueAsync({
-      name: 'slow',
-      useFactory: () => ({
-        redis: {
-          host: 'redis',
-          port: 6379,
-        },
-      }),
+    BullModule.forRoot({
+      redis: {
+        host: 'redis',
+        port: 6379,
+      },
     }),
-    BullModule.registerQueueAsync({
-      name: 'fast',
-      useFactory: () => ({
-        redis: {
-          host: 'redis',
-          port: 6379,
-        },
-      }),
-    }),
+    BullModule.registerQueue(
+      {
+        name: 'slow',
+      },
+      {
+        name: 'fast',
+      },
+    ),
   ],
-  controllers: [JobController],
-  providers: [JobService],
+  controllers: [
+    // JobController
+  ],
+  providers: [
+    //JobService,
+    SlowWorker,
+    FastWorker,
+  ],
 })
 export class WorkersModule {}

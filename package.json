@@ -18,8 +18,8 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "start:slow": "node dist/main slow",
-    "start:fast": "node dist/main fast"
+    "start:slow": "node dist/worker slow",
+    "start:fast": "node dist/worker fast"
   },
   "dependencies": {
     "@liaoliaots/nestjs-redis": "^9.0.5",
