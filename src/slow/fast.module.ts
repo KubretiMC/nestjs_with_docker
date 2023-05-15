@@ -6,17 +6,16 @@ import { FastWorker } from './workers/fast-worker/fast.worker';
   imports: [
     BullModule.forRoot({
       redis: {
-        host: 'redis',
-        port: 6379,
-        //tls: ???
+        host: process.env.REDIS_HOST || 'redis',
+        port: Number(process.env.REDIS_PORT) || 6379,
+        password: process.env.REDIS_PASSWORD || null,
       },
     }),
     BullModule.registerQueue({
       name: 'fast',
-      url: process.env.REDIS_URL
     }),
   ],
   controllers: [],
   providers: [FastWorker],
 })
-export class FastModule {}
+export class FastModule { }

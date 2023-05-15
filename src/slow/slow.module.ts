@@ -6,13 +6,13 @@ import { SlowWorker } from './workers/slow-worker/slow.worker';
   imports: [
     BullModule.forRoot({
       redis: {
-        host: 'redis',
-        port: 6379,
+        host: process.env.REDIS_HOST || 'redis',
+        port: Number(process.env.REDIS_PORT) || 6379,
+        password: process.env.REDIS_PASSWORD || null,
       },
     }),
     BullModule.registerQueue({
       name: 'slow',
-      url: process.env.REDIS_URL
     }),
   ],
   controllers: [],
