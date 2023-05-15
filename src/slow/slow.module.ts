@@ -12,6 +12,7 @@ import { SlowWorker } from './workers/slow-worker/slow.worker';
     }),
     BullModule.registerQueue({
       name: 'slow',
+      url: process.env.REDIS_URL
     }),
   ],
   controllers: [],

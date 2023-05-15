@@ -11,14 +11,17 @@ import { BullModule } from '@nestjs/bull';
       redis: {
         host: 'redis',
         port: 6379,
+        //tls: ??
       },
     }),
     BullModule.registerQueue(
       {
         name: 'slow',
+        url: process.env.REDIS_URL
       },
       {
         name: 'fast',
+        url: process.env.REDIS_URL
       },
     ),
   ],
