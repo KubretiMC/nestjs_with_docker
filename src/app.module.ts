@@ -9,9 +9,14 @@ import { BullModule } from '@nestjs/bull';
   imports: [
     BullModule.forRoot({
       redis: {
-        host: process.env.REDIS_HOST || 'redis',
-        port: Number(process.env.REDIS_PORT) || 6379,
-        password: process.env.REDIS_PASSWORD || null,
+        tls: {
+          servername: 'ec2-34-192-212-159.compute-1.amazonaws.com',
+          rejectUnauthorized: false
+        },
+        host: 'ec2-34-192-212-159.compute-1.amazonaws.com',
+        port: 20270,
+        password: 'pf0620e9019feca0f5b594f08d9796936b6bcfa011c33bd68da9de4a058b742ba',
+        username: '',
       },
     }),
     BullModule.registerQueue(
@@ -26,4 +31,4 @@ import { BullModule } from '@nestjs/bull';
   controllers: [AppController, JobController],
   providers: [AppService, JobService],
 })
-export class AppModule {}
+export class AppModule { }

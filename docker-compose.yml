@@ -7,8 +7,6 @@ services:
       dockerfile: Dockerfile.web
     ports:
       - '3001:3001'
-    depends_on:
-      - redis
     environment:
       - NODE_ENV=production
     hostname: my-web-container
@@ -17,18 +15,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.slow
-    depends_on:
-      - redis
 
   
   fast-worker:
     build:
       context: .
       dockerfile: Dockerfile.fast
-    depends_on:
-      - redis
-
-  redis:
-    image: redis:alpine
-    ports:
-      - '6379:6379'
